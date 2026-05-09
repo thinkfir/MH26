@@ -50,7 +50,7 @@ target_include_directories(TXProject PRIVATE
 target_compile_features(TXProject PUBLIC cxx_std_20)
 
 # dependencies
-target_link_libraries(TXProject PRIVATE 
+target_link_libraries(TXProject PRIVATE
 	TXMath
 	TXData
 	TXUtility
@@ -69,6 +69,7 @@ set_target_properties(TXProject PROPERTIES
 	RUNTIME_OUTPUT_DIRECTORY_DEBUG   "${CMAKE_BINARY_DIR}/bin"
 	RUNTIME_OUTPUT_DIRECTORY_RELEASE "${CMAKE_BINARY_DIR}/bin"
 )
+tx_link_dir_to_bin(TXProject "${CMAKE_SOURCE_DIR}/assets")
 
 install(TARGETS TXProject
     RUNTIME DESTINATION bin
