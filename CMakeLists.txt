@@ -16,8 +16,6 @@ endif()
 
 # TXLib
 tx_add_txlib(
-	LOCAL_DIR
-		/home/TX_Jerry/Programming/dev/libs/TXLib
 	COMPONENTS
 		TXMath
 		TXData

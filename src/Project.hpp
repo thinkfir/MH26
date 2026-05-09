@@ -46,6 +46,7 @@ using bitSpan = span<tx::u8>;
 #include <QKeyEvent>
 
 #include <QDir>
+#include <QUrl> 
 #include <QFile>
 #include <QPixmap>
 #include <QMovie>

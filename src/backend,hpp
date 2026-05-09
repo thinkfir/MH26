@@ -1,0 +1,22 @@
+#pragma once
+#include <Project.hpp>
+
+namespace pp {
+
+class AudioEngine {
+private:
+    string m_path;
+
+public:
+
+    string path() {
+        return m_path;
+    }
+
+    void loadPath(string path) {
+        
+    }
+    
+}
+
+}
