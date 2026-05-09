@@ -407,8 +407,8 @@ private:
 		    config.main.screenDimension.y);
 
 		m_windowBox = new QLabel(this);
-		m_windowBox->setPicture()
-		    m_windowBox->setStyleSheet("background-color: #00FF00");
+		//m_windowBox->setPicture()
+		m_windowBox->setStyleSheet("background-color: #00FF00");
 		m_windowBox->resize(
 		    config.main.screenDimension.x,
 		    config.main.screenDimension.y);

@@ -34,6 +34,7 @@ find_package(Qt6 REQUIRED
 		Widgets
 		Core
 		Gui
+		Multimedia
 )
 
 add_executable(TXProject 
@@ -59,6 +60,7 @@ target_link_libraries(TXProject PRIVATE
 	Qt6::Core
 	Qt6::Widgets
 	Qt6::Gui
+	Qt6::Multimedia
 )
 
 # optimization
