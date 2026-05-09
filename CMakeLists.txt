@@ -33,6 +33,7 @@ find_package(Qt6 REQUIRED
 	COMPONENTS
 		Widgets
 		Core
+		Gui
 )
 
 add_executable(TXProject 
@@ -57,6 +58,7 @@ target_link_libraries(TXProject PRIVATE
 
 	Qt6::Core
 	Qt6::Widgets
+	Qt6::Gui
 )
 
 # optimization

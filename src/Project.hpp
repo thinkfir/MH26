@@ -55,3 +55,4 @@ using bitSpan = span<tx::u8>;
 #include <QLocale>
 
 #include <QPropertyAnimation>
+#include <QPainter>
