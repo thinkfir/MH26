@@ -392,7 +392,9 @@ public:
 private:
 	// components
 
-	QFrame* m_windowBox;
+	QLabel* m_windowBox;
+	QGraphicsBlurEffect* m_blurEffect;
+
 	Tray* m_tray;
 	Content* m_content;
 
@@ -404,8 +406,9 @@ private:
 		    config.main.screenDimension.x,
 		    config.main.screenDimension.y);
 
-		m_windowBox = new QFrame(this);
-		m_windowBox->setStyleSheet("background-color: #00FF00");
+		m_windowBox = new QLabel(this);
+		m_windowBox->setPicture()
+		    m_windowBox->setStyleSheet("background-color: #00FF00");
 		m_windowBox->resize(
 		    config.main.screenDimension.x,
 		    config.main.screenDimension.y);
@@ -416,6 +419,12 @@ private:
 		QObject::connect(m_tray, &Tray::sectionChange, [this](tx::u32 newSection) {
 			m_content->changeSection(newSection);
 		});
+
+		// Inside your init_impl or constructor
+		m_blurEffect = new QGraphicsBlurEffect(this);
+		m_blurEffect->setBlurRadius(10.0);
+		m_blurEffect->setBlurHints(QGraphicsBlurEffect::AnimationHint);
+		m_windowBox->setGraphicsEffect(m_blurEffect);
 	}
 
 private:

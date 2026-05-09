@@ -56,3 +56,4 @@ using bitSpan = span<tx::u8>;
 
 #include <QPropertyAnimation>
 #include <QPainter>
+#include <QGraphicsBlurEffect>
