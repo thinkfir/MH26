@@ -33,6 +33,7 @@ using bitSpan = span<tx::u8>;
 #include <QFileDialog>
 
 #include <QPropertyAnimation>
+#include <QSequentialAnimationGroup>
 #include <QPainter>
 #include <QGraphicsBlurEffect>
 
