@@ -16,7 +16,7 @@ public:
 
     void search(QString query)
     {
-        QString apiKey = "YOUR_API_KEY";
+       QString apiKey = qgetenv("YOUTUBE_API_KEY");
 
         QString url =
             "https://www.googleapis.com/youtube/v3/search?"
