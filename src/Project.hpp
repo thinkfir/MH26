@@ -13,11 +13,12 @@ namespace std {
 using bitSpan = span<tx::u8>;
 }
 
-
+// main include
 #include <QtWidgets/QApplication>
 
 #include <QDebug>
 
+// UI library
 #include <QPushButton>
 #include <QMessageBox>
 #include <QLabel>
@@ -29,6 +30,10 @@ using bitSpan = span<tx::u8>;
 #include <QCheckBox>
 
 #include <QFileDialog>
+
+#include <QPropertyAnimation>
+#include <QPainter>
+#include <QGraphicsBlurEffect>
 
 #include <QVBoxLayout>
 #include <QHBoxLayout>
@@ -45,6 +50,7 @@ using bitSpan = span<tx::u8>;
 #include <QEvent>
 #include <QKeyEvent>
 
+// Helpers
 #include <QDir>
 #include <QUrl> 
 #include <QFile>
@@ -55,6 +61,7 @@ using bitSpan = span<tx::u8>;
 #include <QFont>
 #include <QLocale>
 
-#include <QPropertyAnimation>
-#include <QPainter>
-#include <QGraphicsBlurEffect>
+// Audio
+#include <QMediaPlayer>
+#include <QAudioOutput>
+#include <QMediaMetaData>

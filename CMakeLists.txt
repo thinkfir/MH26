@@ -39,6 +39,7 @@ add_executable(TXProject
 	"${src}/main.cpp"
 	"${src}/Project.hpp"
 	"${src}/MainClass.hpp"
+	"${src}/AudioEngine.hpp"
 )
 target_include_directories(TXProject PRIVATE 
 	"${CMAKE_SOURCE_DIR}"
