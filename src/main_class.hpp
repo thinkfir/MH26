@@ -4,28 +4,6 @@
 
 namespace pp {
 
-
-struct Config {
-	struct General {
-		tx::Coord screenDimension = { 800, 480 };
-	} main;
-	struct Tray {
-		float height = 0.1f; // percentage of the entire screen
-		float margin = 0.1f; // percentage of tray height
-		float padding = 0.1f; // percentage of tray height, padding between button and border
-		float buttonWidth = 3.0f; // percentage of tray height
-		float buttonPadding = 0.1f; // percentage of button width, padding between buttons
-	} tray;
-	struct Content {
-		float height = 0.9f; // percentage of the entire screen
-		float margin = 0.1f; // percentage of tray height
-	} content;
-};
-inline Config config;
-
-
-
-
 class Clickable : public QWidget {
 	Q_OBJECT
 
@@ -205,7 +183,6 @@ private:
 		sequence->addAnimation(stage1);
 		sequence->addAnimation(stage2);
 
-		// 3. Start the whole chain
 		sequence->start(QAbstractAnimation::DeleteWhenStopped);
 	}
 
@@ -324,13 +301,6 @@ private:
 private:
 	QLabel* m_label;
 };
-
-
-
-
-
-
-
 
 
 /**

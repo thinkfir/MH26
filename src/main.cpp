@@ -1,5 +1,5 @@
 #include "Project.hpp"
-#include "MainClass.hpp"
+#include "main_class.hpp"
 
 // 800x480
 

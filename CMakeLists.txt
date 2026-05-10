@@ -21,6 +21,8 @@ tx_add_txlib(
 		TXData
 		TXUtility
 		TXResource
+		TXMap
+		TXJson
 )
 set(CMakeUtils "${TXLib_SOURCE_DIR}/TXCMakeUtils")
 include("${CMakeUtils}/optimization.cmake")
@@ -39,8 +41,9 @@ find_package(Qt6 REQUIRED
 add_executable(TXProject 
 	"${src}/main.cpp"
 	"${src}/Project.hpp"
-	"${src}/MainClass.hpp"
-	"${src}/AudioEngine.hpp"
+	"${src}/main_class.hpp"
+	"${src}/audio_engine.hpp"
+	"${src}/player.hpp"
 )
 target_include_directories(TXProject PRIVATE 
 	"${CMAKE_SOURCE_DIR}"
@@ -57,6 +60,8 @@ target_link_libraries(TXProject PRIVATE
 	TXData
 	TXUtility
 	TXResource
+	TXMap
+	TXJson
 
 	Qt6::Core
 	Qt6::Widgets
