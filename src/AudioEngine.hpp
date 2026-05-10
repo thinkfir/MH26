@@ -30,6 +30,10 @@ public:
 		player->play();
 	}
 
+	void pause() {
+		player->pause
+	}
+
 	QMediaMetaData getRawMetadata() {
 		return data;
 	}
