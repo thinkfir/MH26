@@ -1,6 +1,7 @@
 #include "tx/math.h"
 #include "tx/utility.h"
 #include "tx/data.h"
+#include "tx/resource.h"
 #include <bits/stdc++.h>
 
 using std::cin;
@@ -52,7 +53,7 @@ using bitSpan = span<tx::u8>;
 
 // Helpers
 #include <QDir>
-#include <QUrl> 
+#include <QUrl>
 #include <QFile>
 #include <QPixmap>
 #include <QMovie>

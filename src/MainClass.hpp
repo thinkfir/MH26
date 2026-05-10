@@ -42,6 +42,7 @@ protected:
 		QStyleOption opt;
 		opt.initFrom(this);
 		QPainter p(this);
+		p.setRenderHint(QPainter::Antialiasing);
 		this->style()->drawPrimitive(QStyle::PE_Widget, &opt, &p, this);
 	}
 
@@ -71,6 +72,7 @@ protected:
 		QStyleOption opt;
 		opt.initFrom(this);
 		QPainter p(this);
+		p.setRenderHint(QPainter::Antialiasing);
 		this->style()->drawPrimitive(QStyle::PE_Widget, &opt, &p, this);
 	}
 
@@ -100,13 +102,14 @@ public:
 	~Tray() {}
 
 signals:
-	void sectionChange(tx::u32 newSection);
+	void sectionChange(tx::u32 old, tx::u32 newSection);
 
 protected:
 	void paintEvent(QPaintEvent*) override {
 		QStyleOption opt;
 		opt.initFrom(this);
 		QPainter p(this);
+		p.setRenderHint(QPainter::Antialiasing);
 		this->style()->drawPrimitive(QStyle::PE_Widget, &opt, &p, this);
 	}
 
@@ -150,27 +153,23 @@ private:
 			button->syncLabel();
 
 			QObject::connect(button, &Button::clicked, [i, this]() {
-				emit sectionChange(i);
+				emit sectionChange(currentSection, i);
+				currentSection = i;
 			});
 
-			button->setStyleSheet("background-color: #0000FF; border-radius: 15px; color: white");
+			button->setStyleSheet("background-color: rgba(0, 170, 170, 0); border-radius: 15px; color: black");
 		}
 
-		this->setAttribute(Qt::WA_StyledBackground, true);
-		// this->setStyleSheet(
-		//     "pp--Tray {"
-		//     "   background-color: #00AAFF;"
-		//     "   border-radius: 25px;"
-		//     "   border: 1px solid transparent;" // Forces the border-radius logic to trigger
-		//     "}");
-		// Change this in Tray::init_impl
-		// Just the raw properties, no brackets.
-		// This applies the style to the object itself and all children.
-		this->setStyleSheet("background-color: #00AAFF; border-radius: 20px");
+		this->setStyleSheet("background-color: rgba(200, 255, 255, 175); border-radius: 20px;");
 	}
 
 private:
 	std::array<Button*, sectionCount> m_sectionButtons;
+	QFrame* m_focusAnim;
+	tx::u32 currentSection = 0;
+
+	void sectionChangeAnim() {
+	}
 };
 
 
@@ -187,6 +186,7 @@ protected:
 		QStyleOption opt;
 		opt.initFrom(this);
 		QPainter p(this);
+		p.setRenderHint(QPainter::Antialiasing);
 		this->style()->drawPrimitive(QStyle::PE_Widget, &opt, &p, this);
 	}
 
@@ -213,6 +213,7 @@ protected:
 		QStyleOption opt;
 		opt.initFrom(this);
 		QPainter p(this);
+		p.setRenderHint(QPainter::Antialiasing);
 		this->style()->drawPrimitive(QStyle::PE_Widget, &opt, &p, this);
 	}
 
@@ -239,6 +240,7 @@ protected:
 		QStyleOption opt;
 		opt.initFrom(this);
 		QPainter p(this);
+		p.setRenderHint(QPainter::Antialiasing);
 		this->style()->drawPrimitive(QStyle::PE_Widget, &opt, &p, this);
 	}
 
@@ -265,6 +267,7 @@ protected:
 		QStyleOption opt;
 		opt.initFrom(this);
 		QPainter p(this);
+		p.setRenderHint(QPainter::Antialiasing);
 		this->style()->drawPrimitive(QStyle::PE_Widget, &opt, &p, this);
 	}
 
@@ -294,8 +297,8 @@ public:
 	Content(QWidget* parent) : m_parent(parent) { init_impl(); }
 	~Content() {}
 
-	void changeSection(tx::u32 newSection) {
-		changeSection_impl(newSection);
+	void changeSection(tx::u32 oldSection, tx::u32 newSection) {
+		changeSection_impl(oldSection, newSection);
 	}
 
 private:
@@ -331,8 +334,6 @@ private:
 	tx::Coord m_dimension;
 	tx::u32 m_margin;
 
-	tx::u32 m_currentSection = 0;
-
 	QWidget* m_parent;
 
 	Content_Playing* m_sectionPlaying;
@@ -341,17 +342,17 @@ private:
 	Content_Config* m_sectionConfig;
 
 
-	void changeSection_impl(tx::u32 newSection) {
-		if (newSection == m_currentSection) return;
+	void changeSection_impl(tx::u32 oldSection, tx::u32 newSection) {
+		if (newSection == oldSection) return;
 		//QMessageBox::information(m_parent, "", QString("changing section into %1").arg(newSection));
 
-		applySection_impl(m_currentSection, [&](QWidget* section) {
+		applySection_impl(oldSection, [&](QWidget* section) {
 			section->hide();
 		});
 		applySection_impl(newSection, [&](QWidget* section) {
 			section->show();
 		});
-		m_currentSection = newSection;
+		oldSection = newSection;
 	}
 
 
@@ -407,24 +408,28 @@ private:
 		    config.main.screenDimension.y);
 
 		m_windowBox = new QLabel(this);
-		//m_windowBox->setPicture()
-		m_windowBox->setStyleSheet("background-color: #00FF00");
+
+		//m_windowBox->setStyleSheet("background-color: #00FF00");
 		m_windowBox->resize(
 		    config.main.screenDimension.x,
 		    config.main.screenDimension.y);
 		m_windowBox->lower();
 
-		m_tray = new Tray(this);
-		m_content = new Content(this);
-		QObject::connect(m_tray, &Tray::sectionChange, [this](tx::u32 newSection) {
-			m_content->changeSection(newSection);
-		});
+		QPixmap backgroundPix((tx::getExeDir() / "assets/chen.jpg").c_str());
+		backgroundPix = backgroundPix.scaled(800, 480, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+		m_windowBox->setPixmap(backgroundPix);
 
 		// Inside your init_impl or constructor
 		m_blurEffect = new QGraphicsBlurEffect(this);
 		m_blurEffect->setBlurRadius(10.0);
 		m_blurEffect->setBlurHints(QGraphicsBlurEffect::AnimationHint);
 		m_windowBox->setGraphicsEffect(m_blurEffect);
+
+		m_tray = new Tray(this);
+		m_content = new Content(this);
+		QObject::connect(m_tray, &Tray::sectionChange, [this](tx::u32 oldSection, tx::u32 newSection) {
+			m_content->changeSection(newSection);
+		});
 	}
 
 private:

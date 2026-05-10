@@ -20,6 +20,7 @@ tx_add_txlib(
 		TXMath
 		TXData
 		TXUtility
+		TXResource
 )
 set(CMakeUtils "${TXLib_SOURCE_DIR}/TXCMakeUtils")
 include("${CMakeUtils}/optimization.cmake")
@@ -55,6 +56,7 @@ target_link_libraries(TXProject PRIVATE
 	TXMath
 	TXData
 	TXUtility
+	TXResource
 
 	Qt6::Core
 	Qt6::Widgets
