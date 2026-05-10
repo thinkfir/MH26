@@ -21,6 +21,15 @@ using bitSpan = span<tx::u8>;
 
 #include <QDebug>
 
+//Youtube API
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
+#include <QNetworkRequest>
+
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
+
 // UI library
 #include <QPushButton>
 #include <QMessageBox>
