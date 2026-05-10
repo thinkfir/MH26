@@ -45,9 +45,12 @@ public:
 	int getDuration() {
 		return data.value(QMediaMetaData::Duration).toInt();
 	}
+    
+    QPixmap getCover() {
+        QVariant coverVar = data.value(QMediaMetaData::ThumbnailImage);
+        QImage coverImage = coverVar.value<QImage>();
+        return QPixmap::fromImage(coverImage);
+    }
 
-	// QPixmap getCover() {
-	// 	return data.value(QMediaMetaData::CoverArtImage).to();
-	// }
-};
+};  
 } // namespace pp
