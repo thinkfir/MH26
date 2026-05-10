@@ -14,6 +14,7 @@ struct Album {
 	tx::u32 id;
 };
 
+// collection
 class TrackSourceManager {
 public:
 	TrackSourceManager(const std::filesystem::path& configFilePath)
@@ -25,6 +26,7 @@ public:
 		m_tracks.push_back(Track{
 		    std::string(filePath),
 		    static_cast<tx::u32>(m_tracks.size()) });
+		m_root["tracks"].get<tx::JsonArray>().push_back(tx::JsonValue(makeTrackObject(filePath)));
 	}
 	Track& track(tx::u32 id) { return m_tracks[id]; }
 	const Track& track(tx::u32 id) const { return m_tracks[id]; }
@@ -69,6 +71,12 @@ private:
 		else
 			return false;
 		return true;
+	}
+
+	tx::JsonObject makeTrackObject(std::string_view str) {
+		tx::JsonObject obj;
+		obj.insertSingle("path", tx::JsonValue(std::string(str)));
+		return obj;
 	}
 };
 

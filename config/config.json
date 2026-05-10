@@ -2,13 +2,19 @@
 	"tracks": [
 		{
 			"path": "/home/TX_Jerry/Music/Triple Baka.mp3"
+		},
+		{
+			"path": "/home/TX_Jerry/Music/Triple Baka.mp3"
+		},
+		{
+			"path": "/home/TX_Jerry/Music/Triple Baka.mp3"
 		}
 	],
 	"albums": [
 		{
 			"name": "Miku",
 			"songs": [
-				1, 2
+				0, 1
 			]
 		}
 	]

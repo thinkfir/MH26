@@ -88,6 +88,13 @@ struct Config {
 		float height = 0.9f; // percentage of the entire screen
 		float margin = 0.1f; // percentage of tray height
 	} content;
+
+	struct MusicSource {
+		MusicSource() {
+			std::string(std::getenv("$HOME")) + "/.config/PiPod/";
+		}
+		const char* configPath;
+	} musicSource;
 };
 constexpr const Config config;
-}
+} // namespace pp
